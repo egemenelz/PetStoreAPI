@@ -5,7 +5,7 @@ import lombok.*;
 
 @Getter @Setter
 @AllArgsConstructor
-public class UserList {
+public class UserPojo {
 
     private int id;
     private String username;

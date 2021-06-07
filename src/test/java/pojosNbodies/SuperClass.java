@@ -81,7 +81,7 @@ public class SuperClass {
         return mapList;
     }
 
-    public Map<String, Object> userMap(){
+    public  Map<String, Object> userMap(){
 
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("id",r.nextInt(9999));
@@ -95,6 +95,8 @@ public class SuperClass {
 
         return body;
     }
+
+
 
 
 }
