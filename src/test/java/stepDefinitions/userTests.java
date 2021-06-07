@@ -6,6 +6,8 @@ import io.restassured.response.Response;
 import pojosNbodies.SuperClass;
 import pojosNbodies.userPojos.UserPojo;
 
+import java.util.Map;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
@@ -14,6 +16,7 @@ public class userTests extends SuperClass {
 
     String username;
     String password;
+    Map<String, Object> previousMap;
 
     @Given("Creates List of Users")
     public void creates_list_of_users() {
@@ -43,20 +46,21 @@ public class userTests extends SuperClass {
             extract()
                     .response()
             ;
-        UserPojo userPojo = response.as(UserPojo.class);
-        username = userPojo.getUsername();
-        password = userPojo.getPassword();
 
+        previousMap = response.jsonPath().getMap("");
 
+        username = userMap().get("username").toString();
+        password = userMap().get("password").toString();
     }
     @When("Updated user")
     public void updated_user() {
         given()
                 .spec(petStoreRequestSpec)
-                .pathParam("username", username).
+                .pathParam("username", username)
+                .body(previousMap).
         when()
                 .put("/user/{username}").
-                then()
+        then()
                 .spec(petStoreResponseSpec)
                 .body("username", is(username))
         ;

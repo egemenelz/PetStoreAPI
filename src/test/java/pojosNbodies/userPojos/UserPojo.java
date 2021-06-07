@@ -1,10 +1,12 @@
 package pojosNbodies.userPojos;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 @Getter @Setter
-@AllArgsConstructor
+@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserPojo {
 
     private int id;
